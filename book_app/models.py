@@ -26,3 +26,10 @@ class Book(models.Model):
     #TextField for multiple lines
     summary=models.TextField(blank=True,null=True)
     editor=models.ForeignKey(Editor,on_delete=models.CASCADE)
+
+class Author(models.Model):
+    name=models.CharField(max_length=50,blank=False,null=False)
+    email=models.EmailField(max_length=250)
+    photo=models.ImageField(upload_to='photos',blank=True,null=True)
+    #describe the relationship between Author and Book (*-*)
+    writing=models.ManyToManyField(Book)
