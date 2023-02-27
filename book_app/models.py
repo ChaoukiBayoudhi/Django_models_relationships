@@ -25,3 +25,4 @@ class Book(models.Model):
     releaseDate=models.DateField(auto_now_add=True)
     #TextField for multiple lines
     summary=models.TextField(blank=True,null=True)
+    editor=models.ForeignKey(Editor,on_delete=models.CASCADE)
