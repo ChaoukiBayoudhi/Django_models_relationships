@@ -8,8 +8,17 @@ class Address(models.Model):
     city=models.CharField(max_length=50,blank=False,null=False)
     state=models.CharField(max_length=50,blank=False,null=False)
     country=models.CharField(max_length=50,blank=False,null=False)
-    postalCode=models.models.PositiveIntegerField(blank=False,null=False)
+    postalCode=models.PositiveIntegerField(blank=False,null=False)
 
+    class Meta:
+        #change the table name in the database
+        db_table='address'
+        #change the default ordering of the table
+        #order inserted addresses by number and then by street name
+        #'-number' means descending order of number
+        #ordering=['-number','-street']
+        ordering=['number','street']
+        
 class Editor(models.Model):
     name=models.CharField(max_length=50,blank=False,null=False)
     email=models.EmailField(max_length=250)
@@ -20,7 +29,7 @@ class Book(models.Model):
     esbnCode=models.CharField(max_length=50,primary_key=True, default='00000000')
     title=models.CharField(max_length=50,blank=False,null=False)
     #5 digits for the whole number and 2 digits for the decimal
-    price=models.models.DecimalField(max_digits=5, decimal_places=2)
+    price=models.DecimalField(max_digits=5, decimal_places=2)
     #default is the current date
     releaseDate=models.DateField(auto_now_add=True)
     #TextField for multiple lines
